@@ -1,7 +1,6 @@
 '''
 Jolene Williams
-
-* 10/16/2025 - added CSV file opening/extracting
+Capstone Project - Maze Algorithm Analysis
 * 
 
 
