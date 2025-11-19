@@ -1,6 +1,9 @@
 '''
 A* Algorithm Implementation
 
+Notes:
+x = row, y = item
+
 '''
 import math
 import numpy as np
@@ -36,7 +39,7 @@ def get_valid_neighbors(maze_array, position):
     x,y = position
     rows, cols = maze_array.shape
 
-    # All possible moves
+    # All possible moves, including diagonals
     possible_moves = [(x+1,y), (x-1,y), (x,y+1), (x,y-1), (x+1,y+1), (x-1,y-1), (x+1,y-1), (x-1,y+1)]
 
     return ( (nx, ny) for nx,ny in possible_moves if 0<= nx <= rows and 0 <= ny <= cols and (maze_array[nx,ny] == 1 or maze_array[nx,ny] == 4 or maze_array[nx,ny] == 2))
@@ -115,9 +118,6 @@ def a_star_find_path(maze_array, start_position, goal_position):
 
 if __name__ == "__main__":
     maze_array, start, goal = generate_maze(10,5)
-
-    for i in get_valid_neighbors(maze_array, start):
-        print(f'Neighbor of start: {i},')
 
     print()
 

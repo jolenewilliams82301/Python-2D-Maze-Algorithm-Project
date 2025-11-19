@@ -3,6 +3,10 @@ Jolene Williams
 
 Maze Generation
 
+Notes:
+
+In Numpy 2D array representing the maze, 0 is wall, 1 is a carved path
+
 '''
 import math
 import numpy as np
@@ -41,7 +45,7 @@ def visit(maze_array, visited, maze_height, maze_width):
         # Base case: if there are no unvisited neighbors, stop loop
         unvisited = generate_unvisited_neighbors(row, item, maze_height, maze_width, visited)
         if unvisited:
-            # randomly choose an unvisited neighbor
+            # randomly choose an unvisited neighbor and carve an empty space
             
             next_intersection = rn.choice(unvisited)
             
@@ -105,10 +109,11 @@ def generate_maze(maze_height, maze_width):
 if __name__ == "__main__":
     '''Main code'''
 
-    maze_array, start, goal = generate_maze(15,15)
+    maze_array, start, goal = generate_maze(6,6)
 
     # Display maze
     plt.imshow(maze_array, cmap='Greys', origin='upper')  
     plt.xticks([])
     plt.yticks([])
     plt.show()
+    print(maze_array)
