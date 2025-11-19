@@ -10,6 +10,12 @@ from matplotlib.colors import ListedColormap
 import sys
 from maze_generation import generate_maze
 
+'''
+Notes:
+
+stack.pop() and stack.append() work the same but reversed due to stack being represented as a list: append puts item at the end, pop removes from the end
+
+'''
 
 '''Main function'''
 def dfs_find_path(maze_array, start,goal):
