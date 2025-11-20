@@ -2,9 +2,6 @@
 Jolene Williams
 Capstone Project - Maze Algorithm Analysis
 * 
-
-
-
 '''
 import math
 import numpy as np
@@ -17,28 +14,41 @@ from A_star_algorithm import a_star_find_path
 from DFS_algorithm import dfs_find_path
 import timeit as ti
 
+
+def visualize_maze(maze_array, path, col, alg, title):
+    '''Visualize the maze and the path of each algorithm's maze solution'''
+
+    # Get the line representing the path
+    path_row_vals = [row for (row, item) in path]
+    path_item_vals = [item for (row, item) in path]
+
+    # Display maze
+    plt.figure(num=title)
+    plt.imshow(maze_array, cmap='Greys', origin='upper')  
+
+    # Plot the algorithm's path
+    plt.plot( path_item_vals, path_row_vals, color = col, lw = 3, label=alg )
+
+    # other settings
+    plt.xticks([])
+    plt.yticks([])
+    plt.legend()
+    
 if __name__ == "__main__":
 
     # Generate the maze
-    maze_array, start, goal = generate_maze(20,20)
+    maze_array, start, goal = generate_maze(30,30)
 
-    # Display the maze
-   
+    # Generate each algorithm's solution to the maze
     astar_path = a_star_find_path(maze_array, start, goal)
     dfs_path = dfs_find_path(maze_array, start, goal)
 
-    # Testing plotting
-    astar_path = astar_path
-    astar_y_vals = [x for (x,y) in astar_path]
-    astar_x_vals = [y for (x,y) in astar_path]
-
-    plt.imshow(maze_array, cmap='Greys', origin='upper')  
-    plt.xticks([])
-    plt.yticks([])
-
-    
-    plt.plot(astar_x_vals, astar_y_vals, )
+    # Visualize the maze along with each algorithm's solution
+    visualize_maze(maze_array, astar_path, 'red', 'A* Algorithm', 'Maze Solved With A* Algorithm')
+    visualize_maze(maze_array, dfs_path, 'blue', 'DFS Algorithm', 'Maze Solved With DFS Algorithm')
     plt.show()
+
+
     print(maze_array)
 
     '''
