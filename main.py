@@ -25,7 +25,8 @@ if __name__ == "__main__":
     # Display the maze
    
     astar_path = a_star_find_path(maze_array, start, goal)
-    
+    dfs_path = dfs_find_path(maze_array, start, goal)
+
     # Testing plotting
     astar_path = astar_path
     astar_y_vals = [x for (x,y) in astar_path]
@@ -34,6 +35,8 @@ if __name__ == "__main__":
     plt.imshow(maze_array, cmap='Greys', origin='upper')  
     plt.xticks([])
     plt.yticks([])
+
+    
     plt.plot(astar_x_vals, astar_y_vals, )
     plt.show()
     print(maze_array)
