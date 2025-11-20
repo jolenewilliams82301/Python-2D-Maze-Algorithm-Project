@@ -107,9 +107,9 @@ def generate_maze(maze_height, maze_width):
 
 
 if __name__ == "__main__":
-    '''Main code'''
+    '''Main code to test'''
 
-    maze_array, start, goal = generate_maze(6,6)
+    maze_array, start, goal = generate_maze(15,15)
 
     # Display maze
     plt.imshow(maze_array, cmap='Greys', origin='upper')  

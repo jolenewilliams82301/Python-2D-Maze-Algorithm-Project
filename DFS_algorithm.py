@@ -36,8 +36,8 @@ def dfs_find_path(maze_array, start,goal):
         # Add cell as visited
         visited.append((row,item))
 
-        # Explore neighbors including diagonals
-        for d_row, d_item in [(-1, 0), (1, 0), (0, -1), (0, 1), (1,1), (-1,-1), (1,-1), (-1,1)]:
+        # Explore neighbors
+        for d_row, d_item in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             new_row, new_item = row + d_row, item + d_item
         
             # Check if within bounds, if cell is already visited or is not carved path 

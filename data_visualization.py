@@ -1,8 +1,5 @@
-''''
-
-Data Collection
-
-
+'''
+Data visualization
 
 '''
 import math
@@ -16,5 +13,12 @@ from A_star_algorithm import a_star_find_path
 from DFS_algorithm import dfs_find_path
 import timeit as ti
 
-def data_collection(algorithm):
-    pass
+
+def data_visualization(maze_array, **algorithm_paths):
+
+
+    plt.imshow(maze_array, cmap='Greys', origin='upper')  
+    plt.xticks([])
+    plt.yticks([])
+    plt.show()
+    print(maze_array)
