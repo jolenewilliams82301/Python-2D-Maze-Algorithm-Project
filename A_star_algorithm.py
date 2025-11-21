@@ -117,6 +117,7 @@ def a_star_find_path(maze_array, start_position, goal_position):
     return []  # Return empty list if no path is found
 
 if __name__ == "__main__":
+    '''Main code to test'''
     maze_array, start, goal = generate_maze(5,5)
 
     print()

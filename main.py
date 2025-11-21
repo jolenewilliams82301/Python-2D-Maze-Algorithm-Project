@@ -3,16 +3,20 @@ Jolene Williams
 Capstone Project - Maze Algorithm Analysis
 * 
 '''
-import math
 import numpy as np
 import random as rn
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import sys
+import timeit as ti
+import seaborn as sns
+import pandas as pd
+
+'''File imports'''
 from maze_generation import generate_maze
 from A_star_algorithm import a_star_find_path
 from DFS_algorithm import dfs_find_path
-import timeit as ti
+from data_collection import data_collection
 
 
 def visualize_maze(maze_array, path, col, alg, title):
@@ -46,17 +50,13 @@ if __name__ == "__main__":
     # Visualize the maze along with each algorithm's solution
     visualize_maze(maze_array, astar_path, 'red', 'A* Algorithm', 'Maze Solved With A* Algorithm')
     visualize_maze(maze_array, dfs_path, 'blue', 'DFS Algorithm', 'Maze Solved With DFS Algorithm')
+    
+
+    visitations_data = data_collection([len(astar_path), len(dfs_path)], ['A* Algorithm', 'DFS Algorithm'])
+    (bar_x,bar_y) = visitations_data
+    plt.figure(num='Node Visitations Per Algorithm')
+    plt.bar(bar_x,bar_y)
+
+    
     plt.show()
-
-
     print(maze_array)
-
-    '''
-    print(f'DFS Algorithm : {dfs_find_path(maze_array, start, goal)}')
-    dfs_time = ti.repeat(lambda: dfs_find_path(maze_array,start,goal), repeat=5, number=1000)
-    print(dfs_time)
-
-    print(f'A* Algorithm: {a_star_find_path(maze_array, start, goal)}')
-    astar_time = ti.repeat(lambda: a_star_find_path(maze_array, start, goal), repeat=5, number=1000)
-    print(astar_time)
-    '''

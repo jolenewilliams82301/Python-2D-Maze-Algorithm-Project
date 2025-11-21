@@ -47,6 +47,7 @@ def dfs_find_path(maze_array, start,goal):
     return [] # Return nothing is no path is found
 
 if __name__ == "__main__":
+    '''Main code to test'''
     maze_array, start, goal = generate_maze(10,5)
 
     print()
