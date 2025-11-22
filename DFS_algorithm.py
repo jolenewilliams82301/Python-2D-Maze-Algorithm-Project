@@ -18,23 +18,22 @@ stack.pop() and stack.append() work the same but reversed due to stack being rep
 '''
 
 '''Main function'''
-def dfs_find_path(maze_array, start,goal):
+def dfs_find_path(maze_array, start, goal):
     # Initialize stack with the start position and the visited list
-    stack = [start]
-    visited = [] 
-
+    stack = [(start, [start])]
+    visited = set()
+    
     while len(stack) != 0:
         # Get position at top of the stack as the current cell
-        position = stack.pop()
+        position, path = stack.pop()
         row, item = position
 
         # Return the path if the goal is reached
         if position == goal:
-            visited.append(position)
-            return visited
+            return path
         
         # Add cell as visited
-        visited.append((row,item))
+        visited.add((row,item))
 
         # Explore neighbors
         for d_row, d_item in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
@@ -42,13 +41,13 @@ def dfs_find_path(maze_array, start,goal):
         
             # Check if within bounds, if cell is already visited or is not carved path 
             if (0 <= new_row < len(maze_array) and 0 <= new_item < len(maze_array[0])) and (maze_array[new_row][new_item] == 1 or maze_array[new_row][new_item] == 2 or maze_array[new_row][new_item] == 4)  and (new_row, new_item) not in visited:
-                stack.append((new_row, new_item))
+                stack.append(((new_row, new_item), path + [(new_row, new_item)]))
 
     return [] # Return nothing is no path is found
 
 if __name__ == "__main__":
     '''Main code to test'''
-    maze_array, start, goal = generate_maze(10,5)
+    maze_array, start, goal = generate_maze(5,5)
 
     print()
 
@@ -57,4 +56,5 @@ if __name__ == "__main__":
     print(maze_array)'''
 
     path = dfs_find_path(maze_array, start, goal)
+    print(maze_array)
     print(path)

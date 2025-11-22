@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import sys
 
+
 '''Helper Functions'''
 
 def generate_maze_array(H,W):
@@ -40,13 +41,13 @@ def generate_unvisited_neighbors(row, item, maze_height, maze_width, visited):
 
 def visit(maze_array, visited, maze_height, maze_width):
     '''Randomly generate a maze of size (maze_height x maze_width) using iteration'''
-
     for (row, item) in visited:
-        # Base case: if there are no unvisited neighbors, stop loop
+        # Generate list of unvisited neighbors for each position marked as visited
         unvisited = generate_unvisited_neighbors(row, item, maze_height, maze_width, visited)
+
         if unvisited:
-            # randomly choose an unvisited neighbor and carve an empty space
             
+            # randomly choose an unvisited neighbor and carve an empty space
             next_intersection = rn.choice(unvisited)
             
             if next_intersection == 'NORTH':
@@ -76,15 +77,14 @@ def visit(maze_array, visited, maze_height, maze_width):
         else:
             break
 
+
 '''Main Function'''
 
 def generate_maze(maze_height, maze_width):
-    '''Main maze generation function. Returns 2D Numpy array with carved maze path, the start position, and the goal position'''
+    '''Main maze generation function. Returns: 2D Numpy array with carved maze path, the start position, and the goal position'''
 
     # Create Maze array
     maze_array = generate_maze_array(maze_height, maze_width)
-
-    rows, cols = maze_array.shape
 
     # Set starting position (in form of (row, item)) and add it to visited list
     start_position = (1,1) 
@@ -96,20 +96,18 @@ def generate_maze(maze_height, maze_width):
     # Mark starting position with color
     maze_array[start_position[0]][start_position[1]] = 2  
 
-    # Get goal position and mark with color
+    # Get the goal position and mark with color
     carved_spaces = ((row, item) for row in range(maze_height) for item in range(maze_width) if maze_array[row][item] == 1)
-    goal_row, goal_item = max(carved_spaces)
-    #print(sys.getsizeof(carved_spaces))
+    goal_row, goal_item = max(carved_spaces) # Goal is the farthest position from start position
     maze_array[goal_row][goal_item] = 4
     
-   
     return maze_array, start_position, (goal_row, goal_item)
 
 
 if __name__ == "__main__":
     '''Main code to test'''
 
-    maze_array, start, goal = generate_maze(15,15)
+    maze_array, start, goal = generate_maze(5,5)
 
     # Display maze
     plt.imshow(maze_array, cmap='Greys', origin='upper')  

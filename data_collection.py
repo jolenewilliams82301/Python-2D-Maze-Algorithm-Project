@@ -18,13 +18,18 @@ import timeit as ti
 import seaborn as sns
 import pandas as pd
 
-def func(input):
-    return range(input)
-
-def data_collection(visitation_totals:list, algorithm_titles:list):
+def collect_execution_times(algorithm_titles:list, functions:list, test_count):
+    '''Run test_count number of tests for each algorithm and record the execution times for each test into dataframe'''
+    df = pd.DataFrame(dtype='category')
+    for i in range(len(algorithm_titles)):
+        df[algorithm_titles[i]] = ti.repeat(functions[i], repeat=test_count, number=100)
+    
+    return df
+        
+def collect_node_visitations(visitation_totals:list, algorithm_titles:list):
     '''Collect data about each algorithm'''
 
-    # Get visitations per algorithm data
+    # Get visitations per algorithm 
     bar_x = algorithm_titles
     bar_y = visitation_totals
 
@@ -35,8 +40,6 @@ def data_collection(visitation_totals:list, algorithm_titles:list):
 if __name__ == "__main__":
     '''Main code to test'''
 
-    (x,y) = data_collection([50,60,30], ['Alg', 'Alg2', 'Alg3'])
+    (x,y), df = collect_node_visitations([50,60,30], ['Alg', 'Alg2', 'Alg3'])
 
-    
-    plt.bar(x,y)
-    plt.show()
+    print(df)

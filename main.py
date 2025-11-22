@@ -16,7 +16,8 @@ import pandas as pd
 from maze_generation import generate_maze
 from A_star_algorithm import a_star_find_path
 from DFS_algorithm import dfs_find_path
-from data_collection import data_collection
+from data_collection import collect_node_visitations
+from data_collection import collect_execution_times
 
 
 def visualize_maze(maze_array, path, col, alg, title):
@@ -31,7 +32,7 @@ def visualize_maze(maze_array, path, col, alg, title):
     plt.imshow(maze_array, cmap='Greys', origin='upper')  
 
     # Plot the algorithm's path
-    plt.plot( path_item_vals, path_row_vals, color = col, lw = 3, label=alg )
+    plt.plot( path_item_vals, path_row_vals, color = col, lw = 1, label=alg )
 
     # other settings
     plt.xticks([])
@@ -51,12 +52,20 @@ if __name__ == "__main__":
     visualize_maze(maze_array, astar_path, 'red', 'A* Algorithm', 'Maze Solved With A* Algorithm')
     visualize_maze(maze_array, dfs_path, 'blue', 'DFS Algorithm', 'Maze Solved With DFS Algorithm')
     
+    # Data Analysis
 
-    visitations_data = data_collection([len(astar_path), len(dfs_path)], ['A* Algorithm', 'DFS Algorithm'])
+
+    # Data for node visitations
+    visitations_data = collect_node_visitations([len(astar_path), len(dfs_path)], ['A* Algorithm', 'DFS Algorithm'])
     (bar_x,bar_y) = visitations_data
+
     plt.figure(num='Node Visitations Per Algorithm')
     plt.bar(bar_x,bar_y)
 
     
-    plt.show()
-    print(maze_array)
+    #plt.show()
+
+    a = ti.repeat(lambda: a_star_find_path(maze_array,start,goal), repeat=5,number=60)
+    d = ti.repeat(lambda: dfs_find_path(maze_array,start,goal), repeat=5,number=60)
+    print(a)
+    print(d)

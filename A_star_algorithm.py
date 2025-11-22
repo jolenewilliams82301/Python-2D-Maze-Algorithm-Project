@@ -58,7 +58,6 @@ def get_path(goal_node:Node):
 
 
 '''Main Function'''
-
 def a_star_find_path(maze_array, start_position, goal_position):
     '''Main function for A* algorithm'''
 
