@@ -35,18 +35,5 @@ def get_valid_neighbors(maze_array, position):
             and (maze_array[nx][ny] == 1 or maze_array[nx][ny] == 4 or maze_array[nx][ny] == 2))
 
 
-def return_path(came_from:dict, current):
-    '''Return path if the goal has been reached'''
-    path = []
-
-    while current in came_from:
-        path.append(current)
-        current = came_from[current]
-
-    path.append(current)
-    path = path[::-1]
-    
-    return path
-
 if __name__ == "__main__":
     pass
