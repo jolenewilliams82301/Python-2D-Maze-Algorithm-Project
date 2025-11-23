@@ -13,18 +13,6 @@ from matplotlib.colors import ListedColormap
 import sys
 from maze_generation import generate_maze
 
-class Node():
-    """Node class for A* Pathfinding"""
-
-    def __init__(self, parent=None, position=None):
-        self.parent = parent
-        self.position = position
-
-        self.g = 0
-        self.h = 0
-        self.f = 0
-
-
 '''Helper Functions'''
 
 def calc_heuristic(pos1, pos2):
@@ -61,3 +49,4 @@ def return_path(came_from:dict, current):
     return path
 
 if __name__ == "__main__":
+    pass
