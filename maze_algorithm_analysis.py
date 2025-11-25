@@ -25,6 +25,7 @@ def collect_data(algorithm_titles:list, path_lengths:list, execution_times:list)
     '''Collect data for data analysis/ visualization'''
 
     df = pd.DataFrame()
+    
     df['execution_time'] = execution_times
     df['node_visitations'] = path_lengths
     df['algorithm_title'] = algorithm_titles

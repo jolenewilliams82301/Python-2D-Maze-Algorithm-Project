@@ -57,9 +57,10 @@ def a_star_find_path(maze_array, start, goal):
     open_set_hash.add(start)
 
     came_from = {}
+
     # Cost from start to the current node
     g_score = {start:0}
-    # Estimates cost from start to goal through the current node
+    # Estimated cost from start to goal through the current node
     f_score = {start: calc_heuristic(start, goal)}
 
     while open_set:
@@ -75,8 +76,8 @@ def a_star_find_path(maze_array, start, goal):
             return return_path(came_from, current_position)
         
         for neighbor in get_valid_neighbors(maze_array, current_position):
-            # Get temp g (cost from start to current node plus one)
-            # distance between neighbor and current node should equal 1
+            # Get temp g (cost from start to current node plus one),
+            # as the distance between neighbor and current node should equal 1
             temp_g_score = g_score[current_position] + 1 
 
             if (neighbor not in g_score) or (temp_g_score < g_score[neighbor]):
@@ -85,7 +86,8 @@ def a_star_find_path(maze_array, start, goal):
                 # to temp g score + heuristic(neighbor, goal)
                 came_from[neighbor] = current_position
                 g_score[neighbor] = temp_g_score
-                f_score[neighbor] = temp_g_score + calc_heuristic(neighbor, goal)
+                h_score_neighbor = calc_heuristic(neighbor, goal)
+                f_score[neighbor] = temp_g_score + h_score_neighbor
                 
                 # Add neighbor to open set if it's not added already
                 if neighbor not in open_set_hash:
