@@ -37,10 +37,11 @@ def dfs_find_path(maze_array, start, goal):
 
         # Explore neighbors
         for d_row, d_item in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+
             new_row, new_item = row + d_row, item + d_item
         
-            # Check if within bounds, if cell is already visited or is not carved path 
-            if (0 <= new_row < len(maze_array) and 0 <= new_item < len(maze_array[0])) and (maze_array[new_row][new_item] == 1 or maze_array[new_row][new_item] == 2 or maze_array[new_row][new_item] == 4)  and (new_row, new_item) not in visited:
+            # Check if within bounds, if cell is not visited and is carved path 
+            if (0 <= new_row < len(maze_array) and 0 <= new_item < len(maze_array[0])) and (maze_array[new_row][new_item] in {1,2,4})  and (new_row, new_item) not in visited:
                 stack.append(((new_row, new_item), path + [(new_row, new_item)]))
 
     return [] # Return nothing is no path is found
@@ -50,6 +51,7 @@ if __name__ == "__main__":
     maze_array, start, goal = generate_maze(5,5)
 
     print()
+
 
     '''print(start)
     print(goal)
