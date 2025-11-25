@@ -47,7 +47,7 @@ def visualize_maze(maze_array, path, col, alg, title, axes):
     axes.legend()
     axes.minorticks_off()
     
-if __name__ == "__main__":
+def maze_algorithm_analysis():
 
     # Generate the maze
     maze_array, start, goal = generate_maze(20,50)
@@ -62,7 +62,7 @@ if __name__ == "__main__":
     dfs_et_end = perf_counter()
     
     # Visualize the maze along with each algorithm's solution
-    fig1, (astar_ax, dfs_ax, bfs_ax) = plt.subplots(nrows=2,ncols=1, figsize=(20,20))
+    fig1, (astar_ax, dfs_ax) = plt.subplots(nrows=2,ncols=1, figsize=(10,10))
     fig1.suptitle('Mazes solved by each algorithm')
     visualize_maze(maze_array, astar_path, 'red', 'A* Algorithm', 'A* Algorithm', astar_ax)
     visualize_maze(maze_array, dfs_path, 'blue', 'DFS Algorithm', 'DFS Algorithm', dfs_ax)
@@ -79,3 +79,6 @@ if __name__ == "__main__":
     sns.barplot(ax=bargraph1,x='algorithm_title', y='node_visitations', data=df)
     sns.barplot(ax=bargraph2, x='algorithm_title', y = 'execution_time',data=df)
     plt.show()
+
+if __name__ == "__main__":
+    maze_algorithm_analysis()
