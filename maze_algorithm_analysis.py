@@ -17,7 +17,7 @@ from time import perf_counter
 from maze_generation import generate_maze
 from A_star_algorithm import a_star_find_path
 from DFS_algorithm import dfs_find_path
-
+from BFS_algorithm import bfs_find_path
 
 '''Helper Functions'''
 
@@ -25,7 +25,7 @@ def collect_data(algorithm_titles:list, path_lengths:list, execution_times:list)
     '''Collect data for data analysis/ visualization'''
 
     df = pd.DataFrame()
-    
+
     df['execution_time'] = execution_times
     df['node_visitations'] = path_lengths
     df['algorithm_title'] = algorithm_titles
@@ -33,7 +33,7 @@ def collect_data(algorithm_titles:list, path_lengths:list, execution_times:list)
     return df
 
 
-def visualize_maze(maze_array, path, col, alg, title, axes):
+def visualize_maze(maze_array, path, col, alg, axes):
     '''Visualize the maze and the path of each algorithm's maze solution'''
 
     # Get the line representing the path
@@ -69,18 +69,25 @@ def maze_algorithm_analysis():
     dfs_et_start = perf_counter()
     dfs_path = dfs_find_path(maze_array, start, goal)
     dfs_et_end = perf_counter()
+
+    bfs_et_start = perf_counter()
+    bfs_path = bfs_find_path(maze_array, start, goal)
+    bfs_et_end = perf_counter()
+
     
     '''Visualization'''
 
     # Visualize the maze along with each algorithm's solution
-    fig1, (astar_ax, dfs_ax) = plt.subplots(nrows=2,ncols=1, figsize=(10,10))
+    fig1, (astar_ax, dfs_ax, bfs_ax) = plt.subplots(nrows=3,ncols=1, figsize=(10,10))
     fig1.suptitle('Mazes solved by each algorithm', fontweight='bold')
-    visualize_maze(maze_array, astar_path, 'red', 'A* Algorithm', 'A* Algorithm', astar_ax)
-    visualize_maze(maze_array, dfs_path, 'blue', 'DFS Algorithm', 'DFS Algorithm', dfs_ax)
+    visualize_maze(maze_array, astar_path, 'red', 'A* Algorithm',  astar_ax)
+    visualize_maze(maze_array, dfs_path, 'blue', 'DFS Algorithm',  dfs_ax)
+    visualize_maze(maze_array, bfs_path, 'green', 'BFS Algorithm', bfs_ax)
     fig1.tight_layout()
 
     # Get performance data in dataframe
-    df = collect_data(['A* Algorithm', 'DFS Algorithm'],[len(astar_path), len(dfs_path)], [(a_et_end - a_et_start), (dfs_et_end - dfs_et_start)] )
+    df = collect_data(['A* Algorithm', 'DFS Algorithm', 'BFS Algorithm'],[len(astar_path), len(dfs_path), len(bfs_path)], 
+                      [(a_et_end - a_et_start), (dfs_et_end - dfs_et_start), (bfs_et_end - bfs_et_start) ] )
 
     # Create bar graphs 
     fig2, (node_visitations_bargraph, execution_times_bargraph) = plt.subplots(nrows=2, ncols=1)

@@ -1,9 +1,14 @@
-''''BFS alg'''
+'''
+BFS Algorithm Implementation
+
+NCLab Capstone Project 1
+
+'''
 
 from maze_generation import generate_maze
 from collections import deque
 
-def bfs(maze_array, start, goal):
+def bfs_find_path(maze_array, start, goal):
     queue = deque([start])  # Create a queue and add the start position
     paths = {start: None}   # Keep track of paths
     
@@ -31,10 +36,8 @@ def bfs(maze_array, start, goal):
     return path
 
 
-
 if __name__ == "__main__":
     maze_array, start, goal = generate_maze(5,17)
-    path = bfs(maze_array, start, goal)
+    path = bfs_find_path(maze_array, start, goal)
     print(maze_array)
     print(path)
-    
