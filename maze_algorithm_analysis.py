@@ -83,17 +83,24 @@ def maze_algorithm_analysis():
 
     # Create bar graphs 
     fig2, (node_visitations_bargraph, execution_times_bargraph) = plt.subplots(nrows=2, ncols=1)
-    fig2.suptitle('Performance Data')
+    fig2.suptitle('Performance Data', fontweight='bold')
+
+    for label in node_visitations_bargraph.get_yticklabels():
+        label.set_fontweight('bold')
+    for label in execution_times_bargraph.get_yticklabels():
+        label.set_fontweight('bold')
+    for label in execution_times_bargraph.get_xticklabels():
+        label.set_fontsize
 
     # Bar graph for total node visitations per algorithm
     sns.barplot(ax=node_visitations_bargraph,y='algorithm_title', x='node_visitations', hue='algorithm_title', data=df, width=0.4)
     node_visitations_bargraph.set_ylabel("", fontsize=10)
-    node_visitations_bargraph.set_xlabel("Node Visitations", fontsize=10)
+    node_visitations_bargraph.set_xlabel("Node Visitations", fontsize=10, fontweight='bold')
 
     # Bar graph for execution time per algorithm
     sns.barplot(ax=execution_times_bargraph, y='algorithm_title', x = 'execution_time',hue='algorithm_title',data=df, width=0.4)
     execution_times_bargraph.set_ylabel("", fontsize=10)
-    execution_times_bargraph.set_xlabel("Execution Time (seconds)", fontsize=10)
+    execution_times_bargraph.set_xlabel("Execution Time (seconds)", fontsize=10, fontweight='bold')
     fig2.tight_layout()
     plt.show()
 
