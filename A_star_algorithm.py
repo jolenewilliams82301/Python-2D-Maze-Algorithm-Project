@@ -7,6 +7,7 @@ x = row, y = item
 '''
 from maze_generation import generate_maze
 import heapq
+import math
 
 '''Helper Functions'''
 
@@ -29,7 +30,7 @@ def calc_heuristic(position, goal):
     - Heuristic used: Manhattan Distance '''
     x1,y1 = position
     x2,y2 = goal
-    return abs(x1 - x2) + abs(y1 - y2)
+    return (abs(x1 - x2) + abs(y1 - y2))
 
 
 def get_valid_neighbors(maze_array, position):
@@ -43,7 +44,7 @@ def get_valid_neighbors(maze_array, position):
     possible_moves = [(x+1,y), (x-1,y), (x,y+1), (x,y-1)]
 
     return ( (nx, ny) for nx,ny in possible_moves 
-            if 0<= nx <= rows and 0 <= ny <= cols and maze_array[nx][ny] in valid_values)
+            if 0<= nx < rows and 0 <= ny < cols and maze_array[nx][ny] in valid_values)
 
 '''Main Function'''
 def a_star_find_path(maze_array, start, goal):
@@ -66,6 +67,7 @@ def a_star_find_path(maze_array, start, goal):
     while open_set:
 
         current_f_score, current_position = heapq.heappop(open_set)
+        open_set_hash.discard(current_position)
 
         # Ignore stale entries
         if current_f_score > f_score.get(current_position, float('inf')):

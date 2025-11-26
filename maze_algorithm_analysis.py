@@ -33,7 +33,7 @@ def collect_data(algorithm_titles:list, path_lengths:list, execution_times:list)
     return df
 
 
-def visualize_maze(maze_array, path, col, alg, axes):
+def visualize_maze(maze_array, path, color, alg, axes):
     '''Visualize the maze and the path of each algorithm's maze solution'''
 
     # Get the line representing the path
@@ -44,7 +44,7 @@ def visualize_maze(maze_array, path, col, alg, axes):
     axes.imshow(maze_array, cmap='Greys', origin='upper')  
 
     # Plot the algorithm's path
-    axes.plot( path_item_vals, path_row_vals, color = col, lw = 1, label=alg )
+    axes.plot( path_item_vals, path_row_vals, color = color, lw = 1, label=alg )
 
     # other settings
     axes.set_xticks([])
@@ -58,7 +58,7 @@ def maze_algorithm_analysis():
     show the mazes and each algorithm's solution, then visualize the performance data'''
 
     # Generate the maze
-    maze_array, start, goal = generate_maze(20,50)
+    maze_array, start, goal = generate_maze(20,80)
     maze_id = 0
 
     # Generate each algorithm's solution to the maze
@@ -82,7 +82,7 @@ def maze_algorithm_analysis():
     fig1.suptitle('Mazes solved by each algorithm', fontweight='bold')
     visualize_maze(maze_array, astar_path, 'red', 'A* Algorithm',  astar_ax)
     visualize_maze(maze_array, dfs_path, 'blue', 'DFS Algorithm',  dfs_ax)
-    visualize_maze(maze_array, bfs_path, 'green', 'BFS Algorithm', bfs_ax)
+    visualize_maze(maze_array, bfs_path, 'yellow', 'BFS Algorithm', bfs_ax)
     fig1.tight_layout()
 
     # Get performance data in dataframe

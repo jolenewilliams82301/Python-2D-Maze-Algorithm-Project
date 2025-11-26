@@ -42,6 +42,7 @@ def generate_unvisited_neighbors(row, item, maze_height, maze_width, visited):
 def visit(maze_array, visited, maze_height, maze_width):
     '''Randomly generate a maze of size (maze_height x maze_width) using iteration'''
     for (row, item) in visited:
+
         # Generate list of unvisited neighbors for each position marked as visited
         unvisited = generate_unvisited_neighbors(row, item, maze_height, maze_width, visited)
 
@@ -75,7 +76,7 @@ def visit(maze_array, visited, maze_height, maze_width):
 
         # If there are no more unvisited neighbors, end the loop    
         else:
-            break
+            continue
 
 
 '''Main Function'''
@@ -107,7 +108,7 @@ def generate_maze(maze_height, maze_width):
 if __name__ == "__main__":
     '''Main code to test'''
 
-    maze_array, start, goal = generate_maze(5,5)
+    maze_array, start, goal = generate_maze(20,50)
 
     # Display maze
     plt.imshow(maze_array, cmap='Greys', origin='upper')  
