@@ -14,9 +14,28 @@ import random as rn
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import sys
+from time import perf_counter
 
 
 '''Helper Functions'''
+def generate_goal_position(maze_array, maze_height, maze_width):
+    '''Generate a suitably distant goal position for a maze after it has been randomly generated'''
+
+    # Get the position in the carved path with the largest item (Y) value
+    carved_spaces = ((row, item) for row in range(maze_height) for item in range(maze_width) if maze_array[row][item] == 1)
+    pos_largest_item = max(carved_spaces, key=lambda t:t[1]) 
+
+    # Get the position in the carved path with the largest row (X) value
+    carved_spaces = ((row, item) for row in range(maze_height) for item in range(maze_width) if maze_array[row][item] == 1)
+    pos_largest_row = max(carved_spaces, key=lambda t:t[0])
+
+    # If the largest Y value is greater than the largest X value, set the goal as the position with the largest Y value
+    # else, set the goal as the position with the largest X value
+    goal_row, goal_item = pos_largest_item if pos_largest_item[1] > pos_largest_row[0] else pos_largest_row
+
+    return (goal_row, goal_item)
+
+
 
 def generate_maze_array(H,W):
     '''Generate maze array (2D numpy array) with H rows each with length W'''
@@ -98,8 +117,7 @@ def generate_maze(maze_height, maze_width):
     maze_array[start_position[0]][start_position[1]] = 2  
 
     # Get the goal position and mark with color
-    carved_spaces = ((row, item) for row in range(maze_height) for item in range(maze_width) if maze_array[row][item] == 1)
-    goal_row, goal_item = max(carved_spaces) # Goal is the farthest position from start position
+    (goal_row, goal_item) = generate_goal_position(maze_array, maze_height, maze_width)
     maze_array[goal_row][goal_item] = 4
     
     return maze_array, start_position, (goal_row, goal_item)

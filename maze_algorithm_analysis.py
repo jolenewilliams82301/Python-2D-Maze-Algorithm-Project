@@ -12,6 +12,7 @@ import timeit as ti
 import seaborn as sns
 import pandas as pd
 from time import perf_counter
+import gc
 
 '''File imports'''
 from maze_generation import generate_maze
@@ -75,8 +76,11 @@ def maze_algorithm_analysis():
     bfs_et_end = perf_counter()
 
     
-    '''Visualization'''
-
+    '''
+    #----------------------------
+    # Visualization
+    #----------------------------
+    '''
     # Visualize the maze along with each algorithm's solution
     fig1, (astar_ax, dfs_ax, bfs_ax) = plt.subplots(nrows=3,ncols=1, figsize=(10,10))
     fig1.suptitle('Mazes solved by each algorithm', fontweight='bold')
@@ -111,6 +115,5 @@ def maze_algorithm_analysis():
 
     fig2.tight_layout()
     plt.show()
-
 if __name__ == "__main__":
     maze_algorithm_analysis()
