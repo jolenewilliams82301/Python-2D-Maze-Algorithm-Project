@@ -1,7 +1,7 @@
-'''Starting point for program. tkinter menu to prompt user to generate a new maze or exit program'''
+'''Starting point for program'''
 from maze_algorithm_analysis import maze_algorithm_analysis
 import matplotlib.pyplot as plt
-import cProfile
+from time import perf_counter
 
 if __name__ == "__main__":
     maze_algorithm_analysis()
