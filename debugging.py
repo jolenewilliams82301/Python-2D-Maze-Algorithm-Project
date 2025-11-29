@@ -10,10 +10,11 @@ import cProfile
 import pstats
 from time import perf_counter
 
+'''Testing the execution time of the code and making changes accordingly'''
 
 cProfile.run("maze_algorithm_analysis()", 'analysis.prof')
 
-with open("analysis_after_change.txt", "w") as f:
+with open("analysis_with_plt_close_and_plt_savefig", "w") as f:
     stats = pstats.Stats("analysis.prof", stream=f)
     stats.sort_stats("tottime")
     stats.print_stats()

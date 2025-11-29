@@ -8,13 +8,10 @@ Notes:
 In Numpy 2D array representing the maze, 0 is wall, 1 is a carved path
 
 '''
-import math
 import numpy as np
 import random as rn
 import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
-import sys
-from time import perf_counter
+
 
 
 '''Helper Functions'''
@@ -129,7 +126,7 @@ if __name__ == "__main__":
     maze_array, start, goal = generate_maze(20,50)
 
     # Display maze
-    plt.imshow(maze_array, cmap='Greys', origin='upper')  
+    plt.imshow(maze_array, cmap='Blues', origin='upper')  
     plt.xticks([])
     plt.yticks([])
     plt.show()
