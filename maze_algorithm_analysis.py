@@ -8,38 +8,43 @@ Main function for the program.
 
 '''
 import matplotlib.pyplot as plt
-import sys
-import seaborn as sns
 import pandas as pd
 from time import perf_counter
 import gc
 import random as rn
+from matplotlib.colors import ListedColormap
 
-'''File imports'''
+# File Imports #
 from maze_generation import generate_maze
 from A_star_algorithm import a_star_find_path
 from DFS_algorithm import dfs_find_path
 from BFS_algorithm import bfs_find_path
 
 
-'''Helper Functions'''
+# -- Helper Functions -- #
 
 def generate_maze_id():
     '''Generate unique ID for each maze'''
 
-    l_1 = rn.choice(range(65,91))
-    l_2 = rn.choice(range(0,10))
-    l_3 = rn.choice(range(65,91))
-    l_4 = rn.choice(range(0,10))
+    l_1 = rn.choice(range(4500,7000))
 
-    string_result = chr(l_1) + str(l_2) + chr(l_3) + str(l_4)
+    string_result = hex(l_1)[::-1]
 
     return string_result
 
-def create_maze_plot(maze_array):
-    '''Create maze plot, returns imshow object'''
-    pass
 
+def collect_data(algorithm_titles:list, path_lengths:list, execution_times:list):
+    '''Collect data for data analysis/ visualization'''
+
+    df = pd.DataFrame()
+
+    df['execution_time'] = execution_times
+    df['node_visitations'] = path_lengths
+    df['algorithm_title'] = algorithm_titles
+
+    return df
+
+# -- Visualization Helper Functions -- #
 
 def visualize_performance_data(df, ax):
     '''Visualize the performance data with bar graphs'''
@@ -49,18 +54,21 @@ def visualize_performance_data(df, ax):
     execution_times_bargraph = ax[1,2]
     
     # Make labels bold for readability
-    for label in node_visitations_bargraph.get_yticklabels():
+    for label in node_visitations_bargraph.get_xticklabels():
         label.set_fontweight('bold')
     for label in execution_times_bargraph.get_xticklabels():
         label.set_fontweight('bold')
 
+    # Set colors
+    bar_colors = ['limegreen', 'mediumblue', 'orangered']
+
     # Bar graph for total node visitations per algorithm
-    sns.barplot(ax=node_visitations_bargraph,y='algorithm_title', x='node_visitations', hue='algorithm_title', data=df, width=0.4)
-    node_visitations_bargraph.set_ylabel("", fontsize=8)
-    node_visitations_bargraph.set_xlabel("Node Visitations", fontsize=10, fontweight='bold')
+    node_visitations_bargraph.bar(df['algorithm_title'],df['node_visitations'],  color=bar_colors,width=0.4)
+    node_visitations_bargraph.set_xlabel("")
+    node_visitations_bargraph.set_ylabel("Steps", fontsize=10,fontweight='bold')
 
     # Bar graph for execution time per algorithm
-    sns.barplot(ax=execution_times_bargraph, x='algorithm_title', y= 'execution_time',hue='algorithm_title',data=df, width=0.4)
+    execution_times_bargraph.bar(df['algorithm_title'],df['execution_time'],color=bar_colors,width=0.4)
     execution_times_bargraph.set_xlabel("", fontsize=8)
     execution_times_bargraph.set_ylabel("Execution Time (seconds)", fontsize=10, fontweight='bold')
     
@@ -75,21 +83,9 @@ def visualize_all_mazes(maze_array, maze_paths, ax):
     astar_ax, dfs_ax, bfs_ax = ax[0,0], ax[0,1], ax[0,2]
 
     # Visualize each maze
-    visualize_maze(maze_array, astar_path, 'green', 'A* Algorithm',  astar_ax)
-    visualize_maze(maze_array, dfs_path, 'red', 'DFS Algorithm',  dfs_ax)
-    visualize_maze(maze_array, bfs_path, 'blue', 'BFS Algorithm', bfs_ax)
-
-
-def collect_data(algorithm_titles:list, path_lengths:list, execution_times:list):
-    '''Collect data for data analysis/ visualization'''
-
-    df = pd.DataFrame()
-
-    df['execution_time'] = execution_times
-    df['node_visitations'] = path_lengths
-    df['algorithm_title'] = algorithm_titles
-
-    return df
+    visualize_maze(maze_array, astar_path, 'limegreen', 'A* Algorithm',  astar_ax)
+    visualize_maze(maze_array, dfs_path, 'mediumblue', 'DFS Algorithm',  dfs_ax)
+    visualize_maze(maze_array, bfs_path, 'orangered', 'BFS Algorithm', bfs_ax)
 
 
 def visualize_maze(maze_array, path, color, alg, axes):
@@ -100,15 +96,16 @@ def visualize_maze(maze_array, path, color, alg, axes):
     path_item_vals = [item for (row, item) in path]
 
     # Display maze
-    axes.imshow(maze_array, cmap='Blues', origin='upper')
+    axes.imshow(maze_array, cmap='Greys', origin='upper')
 
     # Plot the algorithm's path
-    axes.plot(path_item_vals, path_row_vals, color=color, lw=1.5, label=alg)
+    axes.plot(path_item_vals, path_row_vals, color=color, lw=2, label=alg)
 
     # other settings
     axes.set_xticks([])
     axes.set_yticks([])
     axes.legend()
+
 
 '''Main Function'''
 
@@ -117,7 +114,7 @@ def maze_algorithm_analysis():
     show the mazes and each algorithm's solution, then visualize the performance data with bar graphs'''
 
     # Generate the maze
-    maze_array, start, goal = generate_maze(30,40)
+    maze_array, start, goal = generate_maze(25,40)
     maze_id = generate_maze_id()
 
     # Generate each algorithm's solution to the maze and record execution time data for each function call
@@ -142,8 +139,8 @@ def maze_algorithm_analysis():
         dfs_path = [(0,0)]
 
     # Create figure to visualize the mazes and performance data
-    fig, ax = plt.subplots(figsize=(10,8),nrows=2, ncols=3, height_ratios=[5,2])
-    fig.suptitle(f'Solution Paths and Performance Data for Maze {maze_id}', fontweight='bold',fontsize=20)
+    fig, ax = plt.subplots(figsize=(10,8),nrows=2, ncols=3, height_ratios=[3,2])
+    fig.suptitle(f'Maze {maze_id}: Solution Paths and Algorithm Performance Data', fontweight='bold',fontsize=15)
     ax[1,1].remove()
 
     # Visualize the maze along with each algorithm's solution
@@ -159,15 +156,14 @@ def maze_algorithm_analysis():
     
     # Save the data to file
     fig.tight_layout()
-    #plt.show()
-    filename = f'algorithm_analysis_for_maze_{maze_id}.png'
-    plt.savefig(filename, dpi=500)
+    plt.show()
 
     # Memory clean up
-    plt.close(fig)
-    gc.collect()
+    del fig, ax, df
+    garb_collect = gc.collect()
 
-    return maze_id, filename
-    
+    return maze_id, garb_collect
+
 if __name__ == "__main__":
-    place_holder_id, place_holder_filen = maze_algorithm_analysis()
+    id, garb_collect = maze_algorithm_analysis()
+    print(garb_collect)
