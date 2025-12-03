@@ -3,8 +3,6 @@ _Implement the A* algorithm, Depth First Search, and Breadth First Search to sol
 
 <img width="1536" height="754" alt="capstoneexampleimage2" src="https://github.com/user-attachments/assets/62bc1a53-1b30-4a9f-8580-1a1f836aa217" />
 
-## Author
-Jolene Williams
 ## Features
 ### Maze Generation
 This program uses a maze generation algorithm that incorporates iteration to randomly generate a 2D maze. First, an empty 2D NumPy array is created to represent the maze grid. Next, the maze generation algorithm iterates over each position, randomly choosing adjacent positions to carve an open space until a complete maze path is formed.
@@ -37,3 +35,6 @@ Run the program:
 ```
 python main.py
 ```
+## Author
+Jolene Williams
+jolenewilliams450@gmail.com
