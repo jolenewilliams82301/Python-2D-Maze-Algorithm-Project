@@ -17,7 +17,7 @@ The maze and each of the algorithm's solution paths are visualized using Matplot
 The number of steps of each algorithm's path and the execution time of each algorithm are recorded. Then, the data is displayed in two bar graphs. 
 
 ## Installation instructions
-Open a Git Bash terminal and use the following command. This will create a local clone of the repository to your machine.
+Open a Git Bash terminal and use the following command. This will create a local clone of the repository on your machine.
 ```
 git clone https://github.com/jolenewilliams82301/Python-2D-Maze-Algorithm-Project.git
 ```
