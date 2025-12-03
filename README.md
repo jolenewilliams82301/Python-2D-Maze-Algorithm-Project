@@ -8,7 +8,7 @@ _Implement the A* algorithm, Depth First Search, and Breadth First Search to sol
 This program uses a maze generation algorithm that incorporates iteration to randomly generate a 2D maze. First, an empty 2D NumPy array is created to represent the maze grid. Next, the maze generation algorithm iterates over each position, randomly choosing adjacent positions to carve an open space until a complete maze path is formed.
 
 ### Algorithm Implementation
-The A* algorithm, Depth First Search, and Breadth First Search are implemented to solve the generated maze. Each algorithm returns their solution path represented as a list of (x,y) positions.
+The A* algorithm, Depth First Search, and Breadth First Search are implemented to solve the generated maze. Each algorithm returns its solution path represented as a list of (x,y) positions.
 
 ### Maze Visualization 
 The maze and each of the algorithm's solution paths are visualized using Matplotlib. 
