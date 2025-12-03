@@ -1,21 +1,26 @@
-'''
-Jolene Williams
-
-Maze Generation
-
+"""
+File: maze_generation.py
+Author: Jolene Williams
+Description: Randomly generate a 2D maze
+NCLab Capstone Project 1
 Notes:
+-- In Numpy 2D array representing the maze, 0 is wall, 1 is a carved path
 
-In Numpy 2D array representing the maze, 0 is wall, 1 is a carved path
+"""
 
-'''
 import numpy as np
 import random as rn
 import matplotlib.pyplot as plt
 
 
 def generate_goal_position(maze_array, maze_height, maze_width):
-    '''Generate a suitably distant goal position for a maze after it has been randomly generated'''
+    ''' Generate the goal position for the randomly generated maze that is suitably far from the start position
 
+        Keyword arguments:
+        maze_array -- 2d numpy array representing the generated maze
+        maze_height -- amount of rows in the maze array (height)
+        maze_width -- the length of each row in the maze (width)
+    '''
     # Get the position in the carved path with the largest item (Y) value
     carved_spaces = ((row, item) for row in range(maze_height) for item in range(maze_width) if maze_array[row][item] == 1)
     pos_largest_item = max(carved_spaces, key=lambda t:t[1]) 
@@ -25,15 +30,19 @@ def generate_goal_position(maze_array, maze_height, maze_width):
     pos_largest_row = max(carved_spaces, key=lambda t:t[0])
 
     # If the largest Y value is greater than the largest X value, set the goal as the position with the largest Y value
-    # else, set the goal as the position with the largest X value
+    # Else, set the goal as the position with the largest X value
     goal_row, goal_item = pos_largest_item if pos_largest_item[1] > pos_largest_row[0] else pos_largest_row
 
     return (goal_row, goal_item)
 
 
-
 def generate_maze_array(H,W):
-    '''Generate maze array (2D numpy array) with H rows each with length W'''
+    ''' Generate a numpy 2D array to represent the maze 
+
+        Keyword arguments:
+        H -- amount of rows in the maze array (height)
+        W -- the length of each row in the maze (width)
+    '''
     if (H >= 5) and (W >= 5):
         return np.zeros( (H,W), dtype=np.uint8)
     else:
@@ -41,7 +50,15 @@ def generate_maze_array(H,W):
 
 
 def generate_unvisited_neighbors(row, item, maze_height, maze_width, visited):
-    '''Generate list of unvisited neighbors of position (row, item)'''
+    ''' Generate list of unvisited nodes adjacent to a given node (row, item)
+
+        Keyword arguments:
+        row -- row position of given node (x value)
+        item -- item position of given node (y value)
+        visited -- list of nodes that have been visited by the maze generation algorithm already
+        maze_height -- amount of rows in the maze array (height)
+        maze_width -- the length of each row in the maze (width)
+    '''
     unvisited = []
         
     if row > 1 and (row - 2, item) not in visited:
@@ -57,7 +74,16 @@ def generate_unvisited_neighbors(row, item, maze_height, maze_width, visited):
 
 
 def visit(maze_array, visited, maze_height, maze_width):
-    '''Randomly generate a maze of size (maze_height x maze_width) using iteration'''
+    ''' Main function of the maze generation algorithm. For each node marked as visited,
+        get a list of its unvisited neighbors. Randomly choose one of those neighbors,
+        set it as carved path, mark it as visited, then repeat the process
+
+        Keyword arguments:
+        maze_array -- 2d numpy array representing the generated maze
+        visited -- list of nodes that have been visited by the maze generation algorithm already
+        maze_height -- amount of rows in the maze array (height)
+        maze_width -- the length of each row in the maze (width)
+    '''
     for (row, item) in visited:
 
         # Generate list of unvisited neighbors for each position marked as visited
@@ -65,7 +91,7 @@ def visit(maze_array, visited, maze_height, maze_width):
 
         if unvisited:
             
-            # randomly choose an unvisited neighbor and carve an empty space
+            # Randomly choose an unvisited neighbor and carve an empty space
             next_intersection = rn.choice(unvisited)
             
             if next_intersection == 'NORTH':
@@ -96,11 +122,14 @@ def visit(maze_array, visited, maze_height, maze_width):
             continue
 
 
-'''Main Function'''
-
 def generate_maze(maze_height, maze_width):
-    '''Main maze generation function. Returns: 2D Numpy array with carved maze path, the start position, and the goal position'''
+    ''' Main maze generation function. Generates a numpy 2D array representing the maze, carves
+        out the path with the maze generation algorithm, then generates the goal position. 
 
+        Keyword arguments:
+        maze_height -- amount of rows in the maze array (height)
+        maze_width -- the length of each row in the maze (width)
+    '''
     # Create Maze array
     maze_array = generate_maze_array(maze_height, maze_width)
 
@@ -122,8 +151,7 @@ def generate_maze(maze_height, maze_width):
 
 
 if __name__ == "__main__":
-    '''Main code to test'''
-
+    # For testing
     maze_array, start, goal = generate_maze(7,7)
 
     # Display maze

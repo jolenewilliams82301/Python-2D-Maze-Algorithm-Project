@@ -1,21 +1,23 @@
-
-'''
-A* Algorithm Implementation
-
+"""
+File: A_star_algorithm.py
+Author: Jolene Williams
+Description: A* Algorithm implementation
+NCLab Capstone Project 1
 Notes:
-x = row, y = item
+-- In this context, x = row, y = item
 
-'''
+"""
+
 from maze_generation import generate_maze
 import heapq
 
 
 def return_path(came_from, current_position):
-    '''Return path.
+    ''' Return path.
 
-    Keyword arguments:
-    came_from -- closed list; positions visited by algorithm
-    current_position -- the current position
+        Keyword arguments:
+        came_from -- closed list; positions visited by algorithm
+        current_position -- the current position
     '''
     path = []
 
@@ -29,71 +31,72 @@ def return_path(came_from, current_position):
 
 
 def calc_heuristic(position, goal):
-    '''Calculate heuristic function (provides estimate of cost to reach goal from given node). Manhattan distance used.
+    ''' Calculate heuristic function (provides estimate of cost to reach goal from given node).
+        Manhattan distance used.
 
-    Keyword arguments:
-    position -- the given node
-    goal -- the goal position
+        Keyword arguments:
+        position -- the given node
+        goal -- the goal position
     '''
-    x1,y1 = position
-    x2,y2 = goal
+    x1, y1 = position
+    x2, y2 = goal
     return (abs(x1 - x2) + abs(y1 - y2))
 
 
 def get_valid_neighbors(maze_array, position):
-    '''Get valid neighbors of position
+    ''' Get valid neighbors of position
 
-    Keyword arguments:
-    maze_array -- 2d numpy array representing maze
-    position -- position of given node
+        Keyword arguments:
+        maze_array -- 2d numpy array representing maze
+        position -- position of given node
     '''
-    x,y = position
+    x, y = position
     rows, cols = maze_array.shape
-    
-    valid_values = {1,2,4}
+
+    valid_values = {1, 2, 4}
 
     # All possible moves
-    possible_moves = [(x+1,y), (x-1,y), (x,y+1), (x,y-1)]
+    possible_moves = [(x+1, y), (x-1, y), (x, y+1), (x, y-1)]
 
-    return ( (nx, ny) for nx,ny in possible_moves 
-            if 0<= nx < rows and 0 <= ny < cols and maze_array[nx][ny] in valid_values)
+    return ((nx, ny) for nx, ny in possible_moves
+            if 0 <= nx < rows and 0 <= ny < cols and maze_array[nx][ny] in valid_values)
 
 
 def a_star_find_path(maze_array, start, goal):
     ''' Main A* function. Solve maze with A* Algorithm and return solution path
 
-    Keyword arguments:
-    maze_array -- 2d numpy array representing maze
-    start -- the start position
-    goal -- the goal position
+        Keyword arguments:
+        maze_array -- 2d numpy array representing maze
+        start -- the start position
+        goal -- the goal position
     '''
-    # Initialize open set, closed set and open_set_hash for more efficient checking
-    # if neighbor is in the open set
+    # Initialize open set, closed set and open_set_hash for more efficient checking if neighbor is in the open set
     open_set = []
     open_set_hash = set()
-    heapq.heappush(open_set, (0,start))
+    heapq.heappush(open_set, (0, start))
     open_set_hash.add(start)
-
     came_from = {}
 
     # Cost from start to the current node
-    g_score = {start:0}
+    g_score = {start: 0}
+
     # Estimated cost from start to goal through the current node
     f_score = {start: calc_heuristic(start, goal)}
 
     while open_set:
 
-        current_f_score, current_position = heapq.heappop(open_set)
+        # Get position with lowest f value
+        current_position = heapq.heappop(open_set)[1]
         open_set_hash.discard(current_position)
 
         # If the goal is reached, return path
         if current_position == goal:
             return return_path(came_from, current_position)
-        
+
         for neighbor in get_valid_neighbors(maze_array, current_position):
             # Get temp g (cost from start to current node plus one),
             # as the distance between neighbor and current node should equal 1
-            temp_g_score = g_score[current_position] + 1 
+            temp_g_score = g_score[current_position] + 1
 
             if (neighbor not in g_score) or (temp_g_score < g_score[neighbor]):
                 # if neighbor's g_score not recorded or temp g score is less than neighbor's g score
@@ -103,17 +106,19 @@ def a_star_find_path(maze_array, start, goal):
                 g_score[neighbor] = temp_g_score
                 h_score_neighbor = calc_heuristic(neighbor, goal)
                 f_score[neighbor] = temp_g_score + h_score_neighbor
-                
+
                 # Add neighbor to open set if it's not added already
                 if neighbor not in open_set_hash:
                     heapq.heappush(open_set, (f_score[neighbor], neighbor))
                     open_set_hash.add(neighbor)
 
     return None
-    
+
 
 if __name__ == "__main__":
-    maze_array, start, goal = generate_maze(10,10)
+    # For testing
+    maze_array, start, goal = generate_maze(10, 10)
+
     path = a_star_find_path(maze_array, start, goal)
     print(maze_array)
     print(path)

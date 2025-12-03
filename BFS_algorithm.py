@@ -1,12 +1,14 @@
-'''
-BFS Algorithm Implementation
-
+"""
+File: DFS_algorithm.py
+Author: Jolene Williams
+Description: BFS Algorithm implementation
 NCLab Capstone Project 1
 
-'''
+"""
 
 from maze_generation import generate_maze
 from collections import deque
+
 
 def bfs_find_path(maze_array, start, goal):
     ''' Main BFS function. Solve maze with BFS and 
@@ -17,8 +19,11 @@ def bfs_find_path(maze_array, start, goal):
         start -- the start position
         goal -- the goal position
     '''
-    queue = deque([start])  # Create a queue and add the start position
-    paths = {start: None}   # Keep track of paths
+    # Create a queue and add the start position
+    queue = deque([start])  
+
+    # Keep track of paths
+    paths = {start: None}   
     
     height, width = maze_array.shape
 
@@ -26,7 +31,10 @@ def bfs_find_path(maze_array, start, goal):
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
     while queue:
+
         current = queue.popleft()
+
+        # If the goal has been reached, end loop
         if current == goal:
             break
 
@@ -45,6 +53,8 @@ def bfs_find_path(maze_array, start, goal):
 
 
 if __name__ == "__main__":
+    # For testing
+
     maze_array, start, goal = generate_maze(5,17)
     path = bfs_find_path(maze_array, start, goal)
     print(maze_array)
