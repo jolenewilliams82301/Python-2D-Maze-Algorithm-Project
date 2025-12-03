@@ -22,6 +22,11 @@ After cloning, navigate to the new directory.
 cd Python-2D-Maze-Algorithm-Project
 ```
 
-
-
-## Libraries Used/Credits
+In order to run this program Python and pip must be installed on your machine. This program also requires importing the Matplotlib, Numpy, and Pandas libraries. Use this command to install the required modules:
+```
+pip install matplotlib numpy pandas
+```
+Run the program with the following command:
+```
+python main.py
+```
