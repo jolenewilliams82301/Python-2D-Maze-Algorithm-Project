@@ -9,7 +9,7 @@ _Implement the A*, Depth First Search, and Breadth First Search algorithms to so
 * **Data Visualization:** The mazes and the solution paths for each algorithm are visualized using Matplotlib. 
 * **Data Analysis:** The efficiency and performance data of each algorithm's maze solution
   
-## Installation Instructions
+## Installation instructions
 Open a Git Bash terminal and use the following command. This will create a local clone of the repository to your machine.
 ```
 git clone https://github.com/jolenewilliams82301/Python-2D-Maze-Algorithm-Project.git
