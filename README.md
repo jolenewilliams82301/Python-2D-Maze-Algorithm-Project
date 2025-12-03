@@ -8,14 +8,14 @@ _Implement the A*, Depth First Search, and Breadth First Search algorithms to so
 This program uses a maze generation algorithm that incorporates iteration to randomly generate a 2D maze. First, an empty 2D NumPy array is created to represent the maze grid. Next, the maze generation algorithm iterates over each position, randomly choosing adjacent positions to carve an open space until a complete maze path is formed.
 
 ### Algorithm Implementation
-The A*, Depth First Search, and Breadth First Search algorithms are implemented to solve the generated maze. Each algorithm returns their solution path represented as a list of (x,y) positions.
+The A* algorithm, Depth First Search, and Breadth First Search are implemented to solve the generated maze. Each algorithm returns their solution path represented as a list of (x,y) positions.
 
 ### Maze Visualization 
 The maze and each of the algorithm's solution paths are visualized using Matplotlib. 
 
 ### Performance Data Visualization
-The number of steps taking by each algorithm's solution path and the execution time of each algorithm are recorded. Then, the data is displayed in two bar graphs. 
-  
+The number of steps of each algorithm's path and the execution time of each algorithm are recorded. Then, the data is displayed in two bar graphs. 
+
 ## Installation instructions
 Open a Git Bash terminal and use the following command. This will create a local clone of the repository to your machine.
 ```
@@ -25,10 +25,9 @@ After cloning, navigate to the new directory.
 ```
 cd Python-2D-Maze-Algorithm-Project
 ```
-
 In order to run this program, Python and pip must be installed on your machine. 
 
-This program also requires importing the Matplotlib, Numpy, and Pandas libraries. Use this command to install the required modules:
+This program also requires importing the Matplotlib, NumPy, and Pandas libraries. Use this command to install the required modules:
 ```
 pip install matplotlib numpy pandas
 ```
