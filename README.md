@@ -10,4 +10,8 @@ _Implement the A*, Depth First Search, and Breadth First Search algorithms to so
 * **Data Analysis:** The efficiency and performance data of each algorithm's maze solution
 ## How To Run
 ## Installation Instructions
+Open a Git Bash terminal and use the following command:
+```
+git clone https://github.com/jolenewilliams82301/Python-2D-Maze-Algorithm-Project.git
+```
 ## Libraries Used/Credits
