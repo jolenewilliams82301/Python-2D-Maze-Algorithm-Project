@@ -37,4 +37,5 @@ python main.py
 ```
 ## Author
 Jolene Williams
-** jolenewilliams450@gmail.com
+
+jolenewilliams450@gmail.com
