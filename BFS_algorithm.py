@@ -9,6 +9,14 @@ from maze_generation import generate_maze
 from collections import deque
 
 def bfs_find_path(maze_array, start, goal):
+    ''' Main BFS function. Solve maze with BFS and 
+        return solution path
+
+        Keyword arguments:
+        maze_array -- 2d numpy array representing maze
+        start -- the start position
+        goal -- the goal position
+    '''
     queue = deque([start])  # Create a queue and add the start position
     paths = {start: None}   # Keep track of paths
     

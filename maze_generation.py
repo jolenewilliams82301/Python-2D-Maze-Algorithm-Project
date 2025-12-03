@@ -13,8 +13,6 @@ import random as rn
 import matplotlib.pyplot as plt
 
 
-
-'''Helper Functions'''
 def generate_goal_position(maze_array, maze_height, maze_width):
     '''Generate a suitably distant goal position for a maze after it has been randomly generated'''
 
@@ -36,7 +34,10 @@ def generate_goal_position(maze_array, maze_height, maze_width):
 
 def generate_maze_array(H,W):
     '''Generate maze array (2D numpy array) with H rows each with length W'''
-    return np.zeros( (H,W), dtype=np.uint8)
+    if (H >= 5) and (W >= 5):
+        return np.zeros( (H,W), dtype=np.uint8)
+    else:
+        print("Height must be 5 or larger, Width must be 5 or larger")
 
 
 def generate_unvisited_neighbors(row, item, maze_height, maze_width, visited):
@@ -123,7 +124,7 @@ def generate_maze(maze_height, maze_width):
 if __name__ == "__main__":
     '''Main code to test'''
 
-    maze_array, start, goal = generate_maze(20,50)
+    maze_array, start, goal = generate_maze(7,7)
 
     # Display maze
     plt.imshow(maze_array, cmap='Blues', origin='upper')  
@@ -131,3 +132,4 @@ if __name__ == "__main__":
     plt.yticks([])
     plt.show()
     print(maze_array)
+    

@@ -19,4 +19,3 @@ if __name__ == "__main__":
     print("Generating maze and algorithm performance data ...")
     id,garb_collect = maze_algorithm_analysis()
     print(f"Generated Maze {id} with algorithm performance data. Run program again to generate a new maze.")
-    #print(f'garbage collection : {garb_collect}')

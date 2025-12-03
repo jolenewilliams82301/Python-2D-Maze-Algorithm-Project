@@ -1,3 +1,4 @@
+
 '''
 A* Algorithm Implementation
 
@@ -7,12 +8,15 @@ x = row, y = item
 '''
 from maze_generation import generate_maze
 import heapq
-import math
 
-'''Helper Functions'''
 
 def return_path(came_from, current_position):
-    ''' Return path '''
+    '''Return path.
+
+    Keyword arguments:
+    came_from -- closed list; positions visited by algorithm
+    current_position -- the current position
+    '''
     path = []
 
     while current_position in came_from:
@@ -20,21 +24,29 @@ def return_path(came_from, current_position):
         current_position = came_from[current_position]
 
     path.append(current_position)
-    path = path[::-1]
 
     return path
 
 
 def calc_heuristic(position, goal):
-    ''' Calculate heuristic function (provides estimate of cost to reach goal from given node). 
-    - Heuristic used: Manhattan Distance '''
+    '''Calculate heuristic function (provides estimate of cost to reach goal from given node). Manhattan distance used.
+
+    Keyword arguments:
+    position -- the given node
+    goal -- the goal position
+    '''
     x1,y1 = position
     x2,y2 = goal
     return (abs(x1 - x2) + abs(y1 - y2))
 
 
 def get_valid_neighbors(maze_array, position):
-    ''' Get valid neighbors of position '''
+    '''Get valid neighbors of position
+
+    Keyword arguments:
+    maze_array -- 2d numpy array representing maze
+    position -- position of given node
+    '''
     x,y = position
     rows, cols = maze_array.shape
     
@@ -46,10 +58,15 @@ def get_valid_neighbors(maze_array, position):
     return ( (nx, ny) for nx,ny in possible_moves 
             if 0<= nx < rows and 0 <= ny < cols and maze_array[nx][ny] in valid_values)
 
-'''Main Function'''
-def a_star_find_path(maze_array, start, goal):
-    '''Main A* Function - returns path'''
 
+def a_star_find_path(maze_array, start, goal):
+    ''' Main A* function. Solve maze with A* Algorithm and return solution path
+
+    Keyword arguments:
+    maze_array -- 2d numpy array representing maze
+    start -- the start position
+    goal -- the goal position
+    '''
     # Initialize open set, closed set and open_set_hash for more efficient checking
     # if neighbor is in the open set
     open_set = []
@@ -68,10 +85,6 @@ def a_star_find_path(maze_array, start, goal):
 
         current_f_score, current_position = heapq.heappop(open_set)
         open_set_hash.discard(current_position)
-
-        # Ignore stale entries
-        if current_f_score > f_score.get(current_position, float('inf')):
-            continue
 
         # If the goal is reached, return path
         if current_position == goal:
