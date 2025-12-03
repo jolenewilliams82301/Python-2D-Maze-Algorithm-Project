@@ -11,7 +11,7 @@ _Implement the A*, Depth First Search, and Breadth First Search algorithms to so
 * **Algorithm Implementation:** The A* Algorithm, DFS, and BFS are implemented to solve the 2D mazes
 * **Data Visualization:** The mazes and the solution paths for each algorithm are visualized using Matplotlib. 
 * **Data Analysis:** The efficiency and performance data of each algorithm's maze solution
-## How To Run
+  
 ## Installation Instructions
 Open a Git Bash terminal and use the following command. This will create a local clone of the repository to your machine.
 ```
