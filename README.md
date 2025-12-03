@@ -17,7 +17,10 @@ Open a Git Bash terminal and use the following command. This will create a local
 ```
 git clone https://github.com/jolenewilliams82301/Python-2D-Maze-Algorithm-Project.git
 ```
-Next, 
+After cloning, navigate to the new directory.
+```
+cd Python-2D-Maze-Algorithm-Project
+```
 
 
 
