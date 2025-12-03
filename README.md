@@ -1,8 +1,10 @@
 # Python Pathfinding Algorithm Analysis using 2D Mazes
-_Implement the A*, Depth First Search, and Breadth First Search algorithms to solve 2D mazes and compare the efficiency of each algorithm. This project was developed as part of the Capstone Project for the NCLab Python Developer Course._
+_Implement the A* algorithm, Depth First Search, and Breadth First Search to solve 2D mazes and compare the efficiency of each algorithm. This project was developed as part of the Capstone Project for the NCLab Python Developer Course._
 
 <img width="1536" height="754" alt="capstoneexampleimage2" src="https://github.com/user-attachments/assets/62bc1a53-1b30-4a9f-8580-1a1f836aa217" />
 
+## Author
+Jolene Williams
 ## Features
 ### Maze Generation
 This program uses a maze generation algorithm that incorporates iteration to randomly generate a 2D maze. First, an empty 2D NumPy array is created to represent the maze grid. Next, the maze generation algorithm iterates over each position, randomly choosing adjacent positions to carve an open space until a complete maze path is formed.
