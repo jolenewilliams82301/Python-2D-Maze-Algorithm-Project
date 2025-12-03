@@ -26,7 +26,7 @@ In order to run this program Python and pip must be installed on your machine. T
 ```
 pip install matplotlib numpy pandas
 ```
-Run the program with the following command:
+Run the program:
 ```
 python main.py
 ```
