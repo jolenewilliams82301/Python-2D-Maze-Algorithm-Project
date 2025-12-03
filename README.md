@@ -3,7 +3,9 @@
 
 # 2D Maze Algorithm Analysis with Python
 _Implement the A*, Depth First Search, and Breadth First Search algorithms to solve 2D mazes and compare the efficiency of each algorithm. This project was developed as part of the Capstone Project for the NCLab Python Developer Course._
+
 <img width="1536" height="754" alt="capstoneexampleimage2" src="https://github.com/user-attachments/assets/62bc1a53-1b30-4a9f-8580-1a1f836aa217" />
+
 ## Features
 * **Maze Generation:** 2D Mazes are randomly generated using iteration.
 * **Algorithm Implementation:** The A* Algorithm, DFS, and BFS are implemented to solve the 2D mazes
