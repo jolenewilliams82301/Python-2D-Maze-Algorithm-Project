@@ -7,7 +7,6 @@ Notes:
 -- In Numpy 2D array representing the maze, 0 is wall, 1 is a carved path
 
 """
-
 import numpy as np
 import random as rn
 import matplotlib.pyplot as plt
